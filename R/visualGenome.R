@@ -31,15 +31,15 @@ visualGenome<-function(Chr,Target.Start,Target.End,Extend.length,ID,x,plot=TRUE)
                                  end = ((Target.End+Extend.length)-1)),ID=ID)
   gsp1.s<-(as.numeric(x$GSP1.End)+Target.Start-1)
   gsp2.s<-(as.numeric(x$GSP2.End)+Target.Start-1)
-  range <- GenomicRanges::GRanges(rep(Chr,3),
+  Range <- GenomicRanges::GRanges(rep(Chr,3),
                                ranges = IRanges::IRanges(
                                  start = c(Target.Start,gsp1.s,gsp2.s),
                                  end = c(Target.End,(as.numeric(x$GSP1.Length)+gsp1.s-1),c(gsp2.s+ as.numeric(x$GSP2.Length)-1))),ID=c(ID,"GSP1","GSP2"))
 
-  ensGeneTrack <- TnT::FeatureTrack(range, tooltip = as.data.frame(pr),
+  ensGeneTrack <- TnT::FeatureTrack(Range, tooltip = as.data.frame(Range),
                                     names = c(ID,"GSP1","GSP2"),
                                     color = TnT::mapcol(c(ID,"GSP1","GSP2"), palette.fun = grDevices::rainbow))
   if(plot==TRUE){
     TnT::TnTGenome(ensGeneTrack, view.range = gr)
-  }else{return(range)}
+  }else{return(Range)}
 }
